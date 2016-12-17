@@ -1,4 +1,5 @@
 wad/service/EmployeeService.class
+wad/service/JobService.class
 wad/controller/DefaultController.class
 wad/repository/EmployeeRepository.class
 wad/repository/JobRepository.class
