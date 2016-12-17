@@ -9,7 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -18,19 +22,27 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class Types extends AbstractPersistable<Long>{
-    
+@Table(name = "Types")
+public class Types extends AbstractPersistable<Long> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @NotNull
     @Column(unique = true)
     private String name;
-    
+
     @NotNull
     @Column(unique = true)
     private String color;
-    
+
     @OneToMany
     private List<Job> jobs;
-    
+
+    public Types() {
+    }
+
     public Types(String name, String color) {
         this.name = name;
         this.color = color;
@@ -62,5 +74,5 @@ public class Types extends AbstractPersistable<Long>{
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
-    
+
 }

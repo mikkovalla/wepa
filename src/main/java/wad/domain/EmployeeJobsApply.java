@@ -7,9 +7,13 @@ package wad.domain;
 
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -17,15 +21,23 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class EmployeeJobsApply extends AbstractPersistable<Long>{
-    
+@Table(name = "Employee_Jobs_Apply")
+public class EmployeeJobsApply extends AbstractPersistable<Long> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @ManyToOne
     @JoinColumn(name = "jobId")
     private Job job;
-    
+
     @ManyToOne
     @JoinColumn(name = "employeeId")
     private Employee employee;
+
+    public EmployeeJobsApply() {
+    }
 
     public EmployeeJobsApply(Job job, Employee employee) {
         this.job = job;
@@ -47,5 +59,5 @@ public class EmployeeJobsApply extends AbstractPersistable<Long>{
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-        
+
 }

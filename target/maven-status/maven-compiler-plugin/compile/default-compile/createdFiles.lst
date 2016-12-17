@@ -7,7 +7,6 @@ wad/repository/EmployeeJobsApplyRepository.class
 wad/domain/Job.class
 wad/DuunihakuriApplication.class
 wad/repository/EmployerRepository.class
-wad/config/DatabaseConfig.class
 wad/domain/Categories.class
 wad/domain/Employee.class
 wad/service/EmployerService.class

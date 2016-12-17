@@ -11,7 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -25,7 +29,12 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
+@Table(name = "Employer")
 public class Employer extends AbstractPersistable<Long> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @NotBlank
     @Length(min = 1)
@@ -57,6 +66,9 @@ public class Employer extends AbstractPersistable<Long> {
 
     @OneToMany
     private List<Job> jobs;
+
+    public Employer() {
+    }
 
     public Employer(String companyName, String email, String username, String password, String companyDescription, Date created) {
         this.companyName = companyName;
