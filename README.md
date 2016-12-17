@@ -5,7 +5,7 @@
 Tämä on Helsingin Yliopiston Syksyn 2016 Web-palvelinohjelmointi Javalla kurssin harjoitustyö [Spring Boot](http://projects.spring.io/spring-boot/)
 kirjastolla joka on asennettu [Herokuun](http://heroku.com) ja käyttää Herokun tarjoamaa PostgreSql tietokantaa.
 
-### [Demo täällä](http://###.herokuapp.com)
+### [Demo täällä](https://mikko-wepa.herokuapp.com/)
 (demo käyttää
 [ilmaista dynoa](https://www.heroku.com/pricing), joten se voi olla aika-ajoin hidas vastaamaan.)
 
