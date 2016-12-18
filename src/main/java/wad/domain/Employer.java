@@ -30,7 +30,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 @Entity
 @Table(name = "Employer")
-public class Employer extends AbstractPersistable<Long> {
+public class Employer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

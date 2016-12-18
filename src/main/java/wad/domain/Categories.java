@@ -15,21 +15,19 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 
 @Entity
 @Table(name = "Categories")
-public class Categories extends AbstractPersistable<Long>{
-    
+public class Categories {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @NotNull
     @Column(unique = true)
     private String name;
-    
+
     @OneToMany
     private List<Job> jobs;
 
@@ -58,5 +56,5 @@ public class Categories extends AbstractPersistable<Long>{
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
-    
+
 }
