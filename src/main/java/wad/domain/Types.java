@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -34,7 +37,7 @@ public class Types extends AbstractPersistable<Long>{
 
     public Types() {
     }
-    
+
     public Types(String name, String color) {
         this.name = name;
         this.color = color;
