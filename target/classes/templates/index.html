@@ -12,6 +12,20 @@
         <h2>Hello its me again</h2>
         <h2>and again.....</h2>
         <h2>testing.....</h2>
+        
+        <h1>jobs</h1>
+
+        <ul>
+            <li th:each="job : ${jobs}">
+                <span th:text="${job.name}">lol </span> 
+
+                <span th:text="${job.employer_id}">hello</span>
+                <span th:text="${job.description}">hello</span>
+                <span th:text="${job.type_id}">byebye</span>
+            </li>
+        </ul>
+        
+        <h1>Ho ho ho!!!!</h1>
     </body>
 
 </html>

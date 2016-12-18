@@ -5,8 +5,11 @@
  */
 package wad.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import wad.repository.JobRepository;
 
 /**
  *
@@ -15,8 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class DefaultController {
 
+    @Autowired
+    private JobRepository jobRepo;
+
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("jobs", jobRepo.findAll());
         return "index";
     }
+
 }
