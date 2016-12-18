@@ -15,7 +15,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class EmployeeJobsApply extends AbstractPersistable<Long>{
+public class EmployeeJobsApply extends AbstractPersistable<Long> {
 
     @ManyToOne
     @JoinColumn(name = "jobId")
@@ -48,5 +48,4 @@ public class EmployeeJobsApply extends AbstractPersistable<Long>{
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-
 }

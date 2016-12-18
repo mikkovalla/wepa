@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class Employee extends AbstractPersistable<Long>{
+public class Employee extends AbstractPersistable<Long> {
 
     @NotBlank
     @Length(min = 1, max = 50)

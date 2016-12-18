@@ -25,7 +25,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class Employer extends AbstractPersistable<Long>{
+public class Employer extends AbstractPersistable<Long> {
 
     @NotBlank
     @Length(min = 1)
@@ -59,6 +59,15 @@ public class Employer extends AbstractPersistable<Long>{
     private List<Job> jobs;
 
     public Employer() {
+    }
+
+    public Employer(String companyName, String email, String username, String password, String companyDescription, Date created) {
+        this.companyName = companyName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.companyDescription = companyDescription;
+        this.created = created;
     }
 
     public String getCompanyName() {
@@ -148,5 +157,4 @@ public class Employer extends AbstractPersistable<Long>{
         }
         return true;
     }
-
 }

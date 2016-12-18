@@ -48,5 +48,4 @@ public class Categories extends AbstractPersistable<Long>{
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
-
 }

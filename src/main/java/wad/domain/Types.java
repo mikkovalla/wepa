@@ -18,7 +18,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class Types extends AbstractPersistable<Long>{
+public class Types extends AbstractPersistable<Long> {
 
     @NotNull
     @Column(unique = true)
@@ -65,5 +65,4 @@ public class Types extends AbstractPersistable<Long>{
     public void setJobs(List<Job> jobs) {
         this.jobs = jobs;
     }
-
 }

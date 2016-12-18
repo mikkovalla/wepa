@@ -24,7 +24,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-public class Job extends AbstractPersistable<Long>{
+public class Job extends AbstractPersistable<Long> {
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
@@ -59,6 +59,16 @@ public class Job extends AbstractPersistable<Long>{
     private List<EmployeeJobsApply> employeeJobsApply;
 
     public Job() {
+    }
+
+    public Job(Categories cat, Employer emp, Types type, String jobName, String description, String area) {
+        this.cat = cat;
+        this.emp = emp;
+        this.type = type;
+        this.jobName = jobName;
+        this.description = description;
+        this.area = area;
+        this.created = new Date();
     }
 
     public Categories getCategory() {
@@ -127,5 +137,4 @@ public class Job extends AbstractPersistable<Long>{
     public void setEmployeeJobsApply(List<EmployeeJobsApply> employeeJobsApply) {
         this.employeeJobsApply = employeeJobsApply;
     }
-
 }
