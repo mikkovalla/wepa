@@ -66,16 +66,6 @@ public class Job extends AbstractPersistable<Long>{
     public Job() {
     }
 
-    public Job(Categories cat, Employer emp, Types type, String jobName, String description, String area, Date created) {
-        this.cat = cat;
-        this.emp = emp;
-        this.type = type;
-        this.jobName = jobName;
-        this.description = description;
-        this.area = area;
-        this.created = created;
-    }
-
     public Categories getCategory() {
         return cat;
     }

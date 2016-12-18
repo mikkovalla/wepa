@@ -11,9 +11,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -69,16 +66,6 @@ public class Employee extends AbstractPersistable<Long>{
     private List<EmployeeJobsApply> employeeJobsApply;
 
     public Employee() {
-    }
-
-    public Employee(String firstName, String lastname, String email, String username, String password, String description, Date created) {
-        this.firstName = firstName;
-        this.lastname = lastname;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.description = description;
-        this.created = created;
     }
 
     public String getFirstName() {
