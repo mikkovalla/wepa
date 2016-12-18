@@ -12,9 +12,16 @@
 
         <ul th:each="job : ${jobs}">
             <li>
-                <span th:text="${job.jobName}">lol </span> 
+                <h4 th:text="${job.jobName}">lol </h4>
+                <span th:text="${job.employer.companyName}">lol </span> 
+                <br>
+                </br>
                 <span th:text="${job.description}">hello</span>
-                <span th:text="${job.type}">byebye</span>
+                <br>
+                </br>
+                <span th:text="${job.type.name}">byebye</span>
+                <br>
+                </br>
             </li>
         </ul>
 
