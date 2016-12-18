@@ -5,10 +5,10 @@
  */
 package wad.service;
 
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import wad.domain.Categories;
 import wad.domain.Job;

@@ -25,7 +25,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-@Table(name = "Jobs")
 public class Job extends AbstractPersistable<Long>{
 
     @ManyToOne

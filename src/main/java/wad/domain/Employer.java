@@ -12,7 +12,6 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -26,7 +25,6 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  * @author mikko
  */
 @Entity
-@Table(name = "Employer")
 public class Employer extends AbstractPersistable<Long>{
 
     @NotBlank
