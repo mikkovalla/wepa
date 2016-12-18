@@ -9,22 +9,18 @@
     <body>
         <h1>Welcome to Spring MVC</h1>
         Now is: <b th:text="${execInfo.now.time}"></b>
-        <h2>Hello its me again</h2>
-        <h2>and again.....</h2>
-        <h2>testing.....</h2>
         
         <h1>jobs</h1>
 
        <ul th:each="job : ${jobs}">
             <li>
-                <span th:text="${job.name}">lol </span> 
-                <span th:text="${job.employer_id}">hello</span>
+                <span th:text="${job.jobName}">lol </span> 
                 <span th:text="${job.description}">hello</span>
-                <span th:text="${job.type_id}">byebye</span>
+                <span th:text="${job.type}">byebye</span>
             </li>
         </ul>
         
-        <h1>Ho ho ho!!!!</h1>
+        
     </body>
 
 </html>

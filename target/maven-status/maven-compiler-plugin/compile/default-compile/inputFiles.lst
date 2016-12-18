@@ -1,5 +1,6 @@
 /Users/mikko/Desktop/wepa/src/main/java/wad/repository/TypesRepository.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/repository/CategoriesRepository.java
+/Users/mikko/Desktop/wepa/src/main/java/wad/controller/JobsController.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/controller/DefaultController.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/DuunihakuriApplication.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/domain/Job.java
@@ -15,4 +16,6 @@
 /Users/mikko/Desktop/wepa/src/main/java/wad/config/DatabaseConfig.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/domain/Categories.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/repository/EmployerRepository.java
+/Users/mikko/Desktop/wepa/src/main/java/wad/controller/EmployeeController.java
 /Users/mikko/Desktop/wepa/src/main/java/wad/repository/EmployeeRepository.java
+/Users/mikko/Desktop/wepa/src/main/java/wad/controller/EmployerController.java

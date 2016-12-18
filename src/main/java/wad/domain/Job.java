@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -65,6 +62,17 @@ public class Job extends AbstractPersistable<Long>{
 
     public Job() {
     }
+
+    public Job(Categories cat, Employer emp, Types type, String jobName, String description, String area) {
+        this.cat = cat;
+        this.emp = emp;
+        this.type = type;
+        this.jobName = jobName;
+        this.description = description;
+        this.area = area;
+        this.created = new Date();
+    }
+    
 
     public Categories getCategory() {
         return cat;

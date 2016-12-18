@@ -12,6 +12,7 @@ import wad.domain.Employer;
  *
  * @author mikko
  */
-public interface EmployerRepository extends JpaRepository<Employer, Long>{
-    
+public interface EmployerRepository extends JpaRepository<Employer, Long> {
+
+    Employer findByUsername(String username);
 }
