@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
  *
@@ -22,11 +23,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "Types")
-public class Types {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class Types extends AbstractPersistable<Long>{
 
     @NotNull
     @Column(unique = true)
