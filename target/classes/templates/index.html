@@ -7,25 +7,18 @@
     </head>
 
     <body>
-<<<<<<< HEAD
         <h1>Wepa-harkka</h1>
-
-=======
-        <h1>Welcome to Spring MVC</h1>
-        Now is: <b th:text="${execInfo.now.time}"></b>
-        
->>>>>>> parent of b3f0637... thymeleaf toimii
         <h1>jobs</h1>
 
-       <ul th:each="job : ${jobs}">
+        <ul th:each="job : ${jobs}">
             <li>
                 <span th:text="${job.jobName}">lol </span> 
                 <span th:text="${job.description}">hello</span>
                 <span th:text="${job.type}">byebye</span>
             </li>
         </ul>
-        
-        
+
+
     </body>
 
 </html>
