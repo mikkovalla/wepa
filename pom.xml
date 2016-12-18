@@ -87,7 +87,7 @@
     </build>
     <profiles>
         <profile>
-            <id>local</id>
+            <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -100,7 +100,7 @@
             </dependencies>
         </profile>
         <profile>
-            <id>productions</id>
+            <id>production</id>
             <activation>
                 <property>
                     <name>env.DYNO</name>
