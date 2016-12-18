@@ -7,26 +7,14 @@
     </head>
 
     <body>
-<<<<<<< HEAD
-        <h1>Wepa-harkka</h1>
-=======
-        <h1>Welcome to Spring MVC</h1>
-        Now is: <b th:text="${execInfo.now.time}"></b>
-        <h2>Hello its me again</h2>
-        <h2>and again.....</h2>
-        <h2>testing.....</h2>
-        
->>>>>>> parent of 2f50dea... @PostConstruct lisätty
-        <h1>jobs</h1>
-
         <ul th:each="job : ${jobs}">
             <li>
-<<<<<<< HEAD
                 <h4 th:text="${job.jobName}">lol </h4>
                 <span th:text="${job.employer.companyName}">lol </span> 
                 <br>
                 </br>
                 <span th:text="${job.description}">hello</span>
+                <span th:text="${job.type}">byebye</span>
                 <br>
                 </br>
                 <span th:text="${job.type.name}">byebye</span>
@@ -35,17 +23,6 @@
             </li>
         </ul>
 
-
-=======
-                <span th:text="${job.name}">lol </span> 
-                <span th:text="${job.employer_id}">hello</span>
-                <span th:text="${job.description}">hello</span>
-                <span th:text="${job.type_id}">byebye</span>
-            </li>
-        </ul>
-        
-        <h1>Ho ho ho!!!!</h1>
->>>>>>> parent of 2f50dea... @PostConstruct lisätty
     </body>
 
 </html>

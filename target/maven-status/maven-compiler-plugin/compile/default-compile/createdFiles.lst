@@ -1,21 +1,12 @@
 wad/service/EmployeeService.class
 wad/service/JobService.class
 wad/controller/DefaultController.class
-<<<<<<< HEAD
-wad/controller/JobsController.class
-=======
->>>>>>> parent of 2f50dea... @PostConstruct lisätty
 wad/repository/EmployeeRepository.class
 wad/repository/JobRepository.class
 wad/repository/EmployeeJobsApplyRepository.class
 wad/domain/Job.class
-<<<<<<< HEAD
-wad/controller/EmployeeController.class
-=======
->>>>>>> parent of 2f50dea... @PostConstruct lisätty
 wad/DuunihakuriApplication.class
 wad/repository/EmployerRepository.class
-wad/controller/EmployerController.class
 wad/config/DatabaseConfig.class
 wad/domain/Categories.class
 wad/domain/Employee.class
