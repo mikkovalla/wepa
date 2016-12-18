@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>Demo</title>
+    </head>
+
+    <body>
+        <h1>Welcome to Spring MVC</h1>
+        Now is: <b th:text="${execInfo.now.time}"></b>
+        
+        <h1>jobs</h1>
+
+       <ul th:each="job : ${jobs}">
+            <li>
+                <span th:text="${job.jobName}">lol </span> 
+                <span th:text="${job.description}">hello</span>
+                <span th:text="${job.type}">byebye</span>
+            </li>
+        </ul>
+        
+        
+    </body>
+
+</html>
