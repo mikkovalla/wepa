@@ -19,7 +19,7 @@
             <header>
                 <div class="col_6 column">
                     <h1>
-                        <a href="#">
+                        <a href="#" th:href="@{/}">
                             <strong>Duuni</strong>HaKuRi</a>
                     </h1>
                 </div>
@@ -36,18 +36,18 @@
                 <!-- Menu palkki -->
                 <ul class="menu">
                     <li class="current">
-                        <a href="#">
+                        <a href="#" th:href="@{/}">
                             Koti</a>
                     </li>
                     <li>
-                        <a href="#">Tsekkaa Duunit</a>
+                        <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
                     </li>
                     <li class="right">
-                        <a href="#">
+                        <a href="#" th:href="@{/register}">
                             Rekisteröidy</a>
                     </li>
                     <li class="right">
-                        <a href="#">
+                        <a href="#" th:href="@{/login}">
                             Loggaa Sisään</a>
                     </li>
                 </ul>
@@ -80,27 +80,64 @@
                     <button class="large blue" type="submit">Hae</button>
                 </form>
             </div>
-
             <div class="col_12 column">
-                <h3>Tälläsiä olis tällä hetkellä tarjolla</h3>
-                <ul id="listings" th:each="job : ${jobs}">
+                <h3 th:text="${job.jobName}">Graafinen Suunnitelija</h3>
+                <ul>
+                    <li th:inline="text">
+                        <strong>Yritys:</strong>
+                        [[${job.employer.companyName}]]
+                    </li>
+                    <li th:inline="text">
+                        <strong>Sijainti:</strong>
+                        [[${job.area}]]
+                    </li>
+                    <li th:inline="text">
+                        <strong>Tyyppi:</strong>
+                        [[${job.type.name}]]
+                    </li>
                     <li>
-                        <div class="type" th:switch="${job.type.name}">
-                            <span th:case=" 'Täys päivä' " style="background-color: #4c9ef1" th:text="${job.type.name}">
-                                TäysPäivä</span>
-                            <span th:case=" 'Osa-aika' " style="background-color: #81b800" th:text="${job.type.name}">
-                                TäysPäivä</span>
-                            <span th:case="*" style="background-color: #f4a209" th:text="${job.type.name}">
-                                TäysPäivä</span>
-                        </div>
-                        <div class="description">
-                            <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:text="${job.area}"></h6>
-                            <p th:text="${job.description}"></p><a href="#" th:href="@{/jobs/{id}(id=${job.id})}">
-                                Lisää...</a>
-                        </div>
+                        <strong>Työnkuvaus:</strong>
+                        <p th:text="${job.description}">o</p>
+                    </li>
+                    <li>
+                        <strong>Yritys esittely:</strong>
+                        <p th:text="${job.employer.companyDescription}">o</p>
+                    </li>
+                    <li>
+                        <strong>Lähetä meili:</strong>
+                        <a href="#" target="_top" th:text="${job.employer.email}">joku@jokulafka.fi</a>
+                    </li>
+                    <li>
+                        <!--show button for employee session -->
+                        <button class="large blue" type="button" name="apply_job" method="post">Hae duunia</button>
+                    </li>
+                    <li class="right">
+                        <!-- show button for employer session -->
+                        <button class="large red" type="button" name="destroy_job" method="post">Poista</button>
+                    </li>
+                </ul>
+                <p>
+                    <a th:href="@{/jobs}">Takaisin selailemaan...</a>
+                </p>
+            </div>
+            <!--Employer session view show applicants-->
+            <div class="col_12 column">
+                <h5>Hakijat</h5>
+                <ul>
+                    <li>
+                        <strong>Nimi:</strong>
+                        Etunimi Sukunimi</li>
+                    <li>
+                        <strong>Esittely:</strong>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dapibus risus at dapibus malesuada. Vestibulum euismod, velit sit amet tempor ornare, nulla augue mattis mi, nec ultricies dolor augue nec lectus. Integer bibendum enim ipsum.</p>
+                    </li>
+                    <li>
+                        <strong>Lähetä meili:</strong>
+                        <a href="mailto:joku@jokulafka.fi?Subject=Job%20Applicant" target="_top">etunimisukunimi@moikkamoi.fi</a>
                     </li>
                 </ul>
             </div>
+            <!--employer session end -->
             <div class="clearfix"></div>
             <footer>
                 <p>Copyright 2016, DuuniHakuri... eiku ei mitään copuraitteja :-D</p>
@@ -109,4 +146,3 @@
         <!-- End Grid -->
     </body>
 </html>
-

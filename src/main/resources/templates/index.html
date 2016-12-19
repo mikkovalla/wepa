@@ -1,34 +1,112 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8" />
-        <title>Demo</title>
+        <!-- META -->
+        <title>DuuniHaKuRi | Duunia Kaikille</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="../../css/kickstart.css" th:href="@{/css/kickstart.css}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" th:href="@{/css/style.css}" media="all"/>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/kickstart.js" th:src="@{/js/kickstart.js}"></script>
     </head>
-
     <body>
-        <h1>Welcome to Spring MVC</h1>
-        Now is: <b th:text="${execInfo.now.time}"></b>
+        <div id="container" class="grid">
+            <header>
+                <div class="col_6 column">
+                    <h1>
+                        <a href="#">
+                            <strong>Duuni</strong>HaKuRi</a>
+                    </h1>
+                </div>
+                <div class="col_6 column right">
+                    <form id="add_job">
+                        <button class="large blue">
+                            <a href="#" id="addjob_button">Lisää Duuni</a>
+                        </button>
+                    </form>
+                </div>
+            </header>
 
-        <h1>jobs</h1>
+            <div class="col_12 column">
+                <!-- Menu palkki -->
+                <ul class="menu">
+                    <li class="current">
+                        <a href="#">
+                            Koti</a>
+                    </li>
+                    <li>
+                        <a href="#">Tsekkaa Duunit</a>
+                    </li>
+                    <li class="right">
+                        <a href="#">
+                            Rekisteröidy</a>
+                    </li>
+                    <li class="right">
+                        <a href="#">
+                            Loggaa Sisään</a>
+                    </li>
+                </ul>
+            </div>
 
-        <ul th:each="job : ${jobs}">
-            <li>
-                <h4 th:text="${job.jobName}">lol </h4>
-                <span th:text="${job.employer.companyName}">lol </span> 
-                <br>
-                </br>
-                <span th:text="${job.description}">hello</span>
-                <br>
-                </br>
-                <span th:text="${job.type.name}">byebye</span>
-                <br>
-                </br>
-            </li>
-        </ul>
+            <div id="search_area" class="col_12 column">
+                <form class="horizontal" method="post" action="#">
+                    <input id="keywords" type="text" placeholder="Mitä duunia haetaan?"/>
+                    <select id="area_select">
+                        <option>Mistä päin?</option>
+                        <option value="espoo">Espoo</option>
+                        <option value="helsinki">Helsinki</option>
+                        <option value="vantaa">Vantaa</option>
+                        <option value="turku">Turku</option>
+                        <option value="lappeenranta">Lappeenranta</option>
+                        <option value="tampere">Tampere</option>
+                        <option value="jyvaskyla">Jyväskylä</option>
+                        <option value="oulu">Oulu</option>
+                    </select>
+                    <select id="category_select">
+                        <option>Miltä alalta?</option>
+                        <option>Front-end devaaja</option>
+                        <option>Back-end devaaja</option>
+                        <option>UI designeri</option>
+                        <option>Fullstack guru</option>
+                        <option>Pelin rakentaja</option>
+                        <option>iOS / Android / Mobile osaaja</option>
+                        <option>Wordpress / Magento / Joomla / ECommerce häkkääjä</option>
+                    </select>
+                    <button class="large blue" type="submit">Hae</button>
+                </form>
+            </div>
 
-
+            <div class="col_12 column">
+                <h3>Tälläsiä olis tällä hetkellä tarjolla</h3>
+                <ul id="listings" th:each="job : ${jobs}">
+                    <li>
+                        <div class="type" th:switch="${job.type.name}">
+                            <span th:case=" 'Täys päivä' " style="background-color: #4c9ef1" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                            <span th:case=" 'Osa-aika' " style="background-color: #81b800" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                            <span th:case="*" style="background-color: #f4a209" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                        </div>
+                        <div class="description">
+                            <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:text="${job.area}"></h6>
+                            <p th:text="${job.description}"></p><a href="#" th:href="@{/jobs/{id}(id=${job.id})}">
+                                Lisää...</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <footer>
+                <p>Copyright 2016, DuuniHakuri... eiku ei mitään copuraitteja :-D</p>
+            </footer>
+        </div>
+        <!-- End Grid -->
     </body>
-
 </html>
 
