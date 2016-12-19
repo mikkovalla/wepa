@@ -95,4 +95,4 @@ Työnantaja voi jättää ilmoituksen uudesta työpaikasta.
 ---
 
 ### Relaatiokaavio
-![relaatiokaavio](https://github.com/mikkovalla/wepa/blob/master/documentation/relaatiokaavio.png)
+![relatiokaavio](https://github.com/mikkovalla/wepa/blob/master/documentation/relatiokaavio.png)
