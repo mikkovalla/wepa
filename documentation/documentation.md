@@ -63,21 +63,22 @@ Sovellus on rakennettu Javalla (JDK 1.8) käyttäen Spring Boot sovellus kirjast
 ![yleiskuvaus](https://github.com/mikkovalla/wepa/blob/master/documentation/yleiskuvaus.png)
 
 ##### Palvelu:
-- ##### Palvelu:
+- Palvelu:
 Palvelulla tarkoitetaan www palvelua jossa palvelu näkyy ja missä työnhakijat ja työnantajat voivat luoda työpaikkoja sekä etsiä työpaikkoja.
--	##### Työnhakija:
+-	Työnhakija:
 Työnhakijalla tarkoitetaan käyttäjää joka käyttää palvelua työnhakuun eli selailemaan ilmoituksia, rekisteröitymään ja hakemaan työpaikkoja.
--	##### Työnantaja:
+-	Työnantaja:
 Työnantajalla tarkoitetaan työntarjoajaa joka rekisteröityy ja ilmoittaa työpaikan.
-Palvelu käyttötapaukset:
 
--	##### Ilmoituksien listaus:
+##### Palvelu käyttötapaukset:
+
+-	Ilmoituksien listaus:
 Kuka tahansa voi lukea ilmoituksia, hakea ilmoituksia, ja selata sivuja, mutta hän ei voi hake työpaikkoja.
--	##### UI:
+-	UI:
 UI:lla tarkoitetaan sivujen ulkoasua joka on suunniteltu käyttäjän käyttökokemuksen maksimoimiseksi.
--	##### Ilmoituksen jättäminen:
+-	Ilmoituksen jättäminen:
 Rekisteröitynyt työnantaja voi jättää työpaikka ilmoituksen omien sivujensa kautta.
--	##### Rekisteröityminen:
+-	Rekisteröityminen:
 Kuka tahansa voi rekisteröityä palveluun joko työnantajana tai työnhakijana.
 
 ##### Työnhakijan käyttötapaukset:
@@ -94,4 +95,4 @@ Työnantaja voi jättää ilmoituksen uudesta työpaikasta.
 ---
 
 ### Relaatiokaavio
-[relaatiokaavio]: https://github.com/mikkovalla/wepa/documentation/relaatiokaavio.png "relaatiokaavio"
+![relaatiokaavio](https://github.com/mikkovalla/wepa/blob/master/documentation/relaatiokaavio.png)
