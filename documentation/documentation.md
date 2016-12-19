@@ -60,7 +60,7 @@ Sovellus on rakennettu Javalla (JDK 1.8) käyttäen Spring Boot sovellus kirjast
 ---
 
 ### Yleiskuvaus
-[yleiskuvaus]: wepa/documentation/relatiokaavio.png "yleiskuvaus"
+![yleiskuvaus](wepa/documentation/relatiokaavio.png "yleiskuvaus")
 
 ##### Palvelu:
 - ##### Palvelu:
