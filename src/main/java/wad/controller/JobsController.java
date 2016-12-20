@@ -40,4 +40,9 @@ public class JobsController {
         model.addAttribute("jobs", jobService.all());
         return "jobs";
     }
+    
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public String register() {
+        return "register";
+    }
 }
