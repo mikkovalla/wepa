@@ -34,15 +34,20 @@ public class JobsController {
         model.addAttribute("job", jobService.findOne(id));
         return "details";
     }
-    
+
     @RequestMapping(value = "/jobs", method = RequestMethod.GET)
     public String jobs(Model model) {
         model.addAttribute("jobs", jobService.all());
         return "jobs";
     }
-    
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register() {
         return "register";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
     }
 }
