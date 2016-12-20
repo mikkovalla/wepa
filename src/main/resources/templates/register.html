@@ -54,7 +54,7 @@
             </div>
             <div class="col_12 column">
                 <div class="col_5 column">
-                    <form id="reg_form_employee" th:action="@{/register/employee}" method="POST">
+                    <form id="reg_form_employee" th:action="@{/register/employee}" th:object="${employee}" method="POST">
                         <fieldset>
                             <legend>Duunin hakija luo tili</legend>
                             <p>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="col_1 column"></div>
                 <div class="col_5 column">
-                    <form id="reg_form_employer" th:action="@{/register/employer}" method="post">
+                    <form id="reg_form_employer" th:action="@{/register/employer}" th:object="${employer}" method="post">
                         <fieldset>
                             <legend>Duunin tarjoaja luo tili</legend>
                             <p>
