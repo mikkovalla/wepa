@@ -1,8 +1,10 @@
 wad\DuunihakuriApplication.class
+wad\controller\EmployerController.class
 wad\service\EmployeeService.class
 wad\repository\EmployeeJobsApplyRepository.class
 wad\repository\EmployerRepository.class
 wad\repository\TypesRepository.class
+wad\controller\JobsController.class
 wad\controller\DefaultController.class
 wad\repository\JobRepository.class
 wad\domain\Types.class
@@ -16,3 +18,4 @@ wad\service\EmployerService.class
 wad\domain\Employer.class
 wad\domain\Employee.class
 wad\domain\EmployeeJobsApply.class
+wad\controller\EmployeeController.class
