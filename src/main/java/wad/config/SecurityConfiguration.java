@@ -23,31 +23,42 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    
+
     @Autowired
     private UserDetailsService employeeDetailsService;
-    
+
     @Autowired
     private UserDetailsService employerDetailsService;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/*").permitAll();
-                //.antMatchers("/jobs").permitAll()
-                //.antMatchers("/login").permitAll()
-                //.antMatchers("/register").permitAll()
-                //.antMatchers("/employer/*").hasAnyRole("EMPLOYER")
-                //.antMatchers("/employee/*").hasAnyRole("EMPLOYEE")
-                //.anyRequest().authenticated();
+        //.antMatchers("/jobs").permitAll()
+        //.antMatchers("/login").permitAll()
+        //.antMatchers("/register").permitAll()
+        //.antMatchers("/employer/*").hasAnyRole("EMPLOYER")
+        //.antMatchers("/employee/*").hasAnyRole("EMPLOYEE")
+        //.anyRequest().authenticated();
+        http.formLogin()
+                .loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .permitAll();
+
+        http.logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/")
+                .permitAll()
+                .invalidateHttpSession(true);
     }
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(employeeDetailsService).passwordEncoder(passwordEncoder());
         auth.userDetailsService(employerDetailsService).passwordEncoder(passwordEncoder());
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
