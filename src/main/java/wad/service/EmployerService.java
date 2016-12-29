@@ -8,7 +8,9 @@ package wad.service;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import wad.domain.Employer;
 import wad.repository.EmployerRepository;
@@ -35,6 +37,14 @@ public class EmployerService {
         return employerRepo.findOne(id);
     }
 
+    public Employer findByUsername(String username) {
+        return employerRepo.findByUsername(username);
+    }
+
+    public Employer findByEmail(String email) {
+        return employerRepo.findByEmail(email);
+    }
+
     public List<Employer> all() {
         return employerRepo.findAll();
     }
@@ -48,13 +58,11 @@ public class EmployerService {
     }
 
     public Employer addEmployer(Employer employer) {
-        Employer emp = new Employer(
-                employer.getCompanyName(),
-                employer.getEmail(),
-                employer.getUsername(),
-                employer.getPassword(),
-                employer.getCompanyDescription(),
-                new Date());
-        return employerRepo.save(emp);
+        return employerRepo.save(employer);
+    }
+
+    public Employer getAuthenticatedPerson() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return employerRepo.findByUsername(((Employer) authentication.getPrincipal()).getUsername());
     }
 }

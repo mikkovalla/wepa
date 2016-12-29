@@ -15,4 +15,6 @@ import wad.domain.Employer;
 public interface EmployerRepository extends JpaRepository<Employer, Long> {
 
     Employer findByUsername(String username);
+
+    Employer findByEmail(String email);
 }

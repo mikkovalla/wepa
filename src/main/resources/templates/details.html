@@ -1,0 +1,148 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- META -->
+        <title>DuuniHaKuRi | Duunia Kaikille</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="../../css/kickstart.css" th:href="@{/css/kickstart.css}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" th:href="@{/css/style.css}" media="all"/>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/kickstart.js" th:src="@{/js/kickstart.js}"></script>
+    </head>
+    <body>
+        <div id="container" class="grid">
+            <header>
+                <div class="col_6 column">
+                    <h1>
+                        <a href="#" th:href="@{/}">
+                            <strong>Duuni</strong>HaKuRi</a>
+                    </h1>
+                </div>
+                <div class="col_6 column right">
+                    <form id="add_job">
+                        <button class="large blue">
+                            <a href="#" id="addjob_button">Lisää Duuni</a>
+                        </button>
+                    </form>
+                </div>
+            </header>
+
+            <div class="col_12 column">
+                <!-- Menu palkki -->
+                <ul class="menu">
+                    <li class="current">
+                        <a href="#" th:href="@{/}">
+                            Koti</a>
+                    </li>
+                    <li>
+                        <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
+                    </li>
+                    <li class="right">
+                        <a href="#" th:href="@{/register}">
+                            Rekisteröidy</a>
+                    </li>
+                    <li class="right">
+                        <a href="#" th:href="@{/login}">
+                            Loggaa Sisään</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="search_area" class="col_12 column">
+                <form class="horizontal" method="post" action="#">
+                    <input id="keywords" type="text" placeholder="Mitä duunia haetaan?"/>
+                    <select id="area_select">
+                        <option>Mistä päin?</option>
+                        <option value="espoo">Espoo</option>
+                        <option value="helsinki">Helsinki</option>
+                        <option value="vantaa">Vantaa</option>
+                        <option value="turku">Turku</option>
+                        <option value="lappeenranta">Lappeenranta</option>
+                        <option value="tampere">Tampere</option>
+                        <option value="jyvaskyla">Jyväskylä</option>
+                        <option value="oulu">Oulu</option>
+                    </select>
+                    <select id="category_select">
+                        <option>Miltä alalta?</option>
+                        <option>Front-end devaaja</option>
+                        <option>Back-end devaaja</option>
+                        <option>UI designeri</option>
+                        <option>Fullstack guru</option>
+                        <option>Pelin rakentaja</option>
+                        <option>iOS / Android / Mobile osaaja</option>
+                        <option>Wordpress / Magento / Joomla / ECommerce häkkääjä</option>
+                    </select>
+                    <button class="large blue" type="submit">Hae</button>
+                </form>
+            </div>
+            <div class="col_12 column">
+                <h3 th:text="${job.jobName}">Graafinen Suunnitelija</h3>
+                <ul>
+                    <li th:inline="text">
+                        <strong>Yritys:</strong>
+                        [[${job.employer.companyName}]]
+                    </li>
+                    <li th:inline="text">
+                        <strong>Sijainti:</strong>
+                        [[${job.area}]]
+                    </li>
+                    <li th:inline="text">
+                        <strong>Tyyppi:</strong>
+                        [[${job.type.name}]]
+                    </li>
+                    <li>
+                        <strong>Työnkuvaus:</strong>
+                        <p th:text="${job.description}">o</p>
+                    </li>
+                    <li>
+                        <strong>Yritys esittely:</strong>
+                        <p th:text="${job.employer.companyDescription}">o</p>
+                    </li>
+                    <li>
+                        <strong>Lähetä meili:</strong>
+                        <a href="#" target="_top" th:text="${job.employer.email}">joku@jokulafka.fi</a>
+                    </li>
+                    <li>
+                        <!--show button for employee session -->
+                        <button class="large blue" type="button" name="apply_job" method="post">Hae duunia</button>
+                    </li>
+                    <li class="right">
+                        <!-- show button for employer session -->
+                        <button class="large red" type="button" name="destroy_job" method="post">Poista</button>
+                    </li>
+                </ul>
+                <p>
+                    <a th:href="@{/jobs}">Takaisin selailemaan...</a>
+                </p>
+            </div>
+            <!--Employer session view show applicants-->
+            <div class="col_12 column">
+                <h5>Hakijat</h5>
+                <ul>
+                    <li>
+                        <strong>Nimi:</strong>
+                        Etunimi Sukunimi</li>
+                    <li>
+                        <strong>Esittely:</strong>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dapibus risus at dapibus malesuada. Vestibulum euismod, velit sit amet tempor ornare, nulla augue mattis mi, nec ultricies dolor augue nec lectus. Integer bibendum enim ipsum.</p>
+                    </li>
+                    <li>
+                        <strong>Lähetä meili:</strong>
+                        <a href="mailto:joku@jokulafka.fi?Subject=Job%20Applicant" target="_top">etunimisukunimi@moikkamoi.fi</a>
+                    </li>
+                </ul>
+            </div>
+            <!--employer session end -->
+            <div class="clearfix"></div>
+            <footer>
+                <p>Copyright 2016, DuuniHakuri... eiku ei mitään copuraitteja :-D</p>
+            </footer>
+        </div>
+        <!-- End Grid -->
+    </body>
+</html>

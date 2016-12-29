@@ -11,4 +11,8 @@ kirjastolla joka on asennettu [Herokuun](http://heroku.com) ja käyttää Heroku
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+### [Dokumentaatio](https://github.com/mikkovalla/wepa/blob/master/documentation/documentation.md)
+Ohjelman dokumentaatio löytyy Dokumentaatio linkin takaa.
+
+
 Lisenssi [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
