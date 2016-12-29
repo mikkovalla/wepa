@@ -27,35 +27,33 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Employer extends AbstractPersistable<Long> {
 
-    @NotBlank
-    @Length(min = 1)
-    @NotNull
+    @NotBlank(message = "Anna yrityksen nimi")
+    @Length(min = 1, message = "Yrityksen nimen täytyy olla vähintään 1 merkki")
     @Column(unique = true)
     private String companyName;
 
-    @NotBlank
+    @NotBlank(message = "anna yhteys sähköposti")
     @Email
     private String email;
 
-    @NotBlank
-    @Length(min = 5)
-    @NotNull
+    @NotBlank(message = "Anna yrityksen käyttäjätunnus")
+    @Length(min = 5, message = "Käyttäjätunnuksen on oltava vähintään 5 merkkiä pitkä")
     @Column(unique = true)
     private String username;
 
-    @NotBlank
-    @NotNull
-    @Length(min = 5)
+    @NotBlank(message = "Anna yrityksen salasana")
+    @Length(min = 5, message = "salasanan on oltava vähintään 5 merkkiä pitkä")
     @Column(unique = true)
     private String password;
 
-    @NotNull
+    @NotBlank(message = "Anna yrityksen nimi")
+    @Length(min = 10, message = "Esittelyn on oltava vähintään 10 merkkiä pitkä")
     private String companyDescription;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created;
 
-    @OneToMany
+    @OneToMany(mappedBy = "emp")
     private List<Job> jobs;
 
     public Employer() {

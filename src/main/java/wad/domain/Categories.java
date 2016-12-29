@@ -14,13 +14,13 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Categories extends AbstractPersistable<Long>{
+public class Categories extends AbstractPersistable<Long> {
 
     @NotNull
     @Column(unique = true)
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cat")
     private List<Job> jobs;
 
     public Categories() {

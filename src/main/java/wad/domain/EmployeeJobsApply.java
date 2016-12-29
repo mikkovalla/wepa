@@ -18,11 +18,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class EmployeeJobsApply extends AbstractPersistable<Long> {
 
     @ManyToOne
-    @JoinColumn(name = "jobId")
+    @JoinColumn
     private Job job;
 
     @ManyToOne
-    @JoinColumn(name = "employeeId")
+    @JoinColumn
     private Employee employee;
 
     public EmployeeJobsApply() {

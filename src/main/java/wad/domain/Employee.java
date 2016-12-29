@@ -14,7 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -27,40 +26,35 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Employee extends AbstractPersistable<Long> {
 
-    @NotBlank
-    @Length(min = 1, max = 50)
-    @NotNull
+    @NotBlank(message = "On annettava etunimi!")
+    @Length(min = 1, max = 50, message = "Nimen pituus on 1 - 50 merkkiä")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "On annettava myös sukunimi!")
     @Length(min = 1, max = 100)
-    @NotNull
     private String lastname;
 
-    @NotBlank
+    @NotBlank(message = "Email osoite on pakollinen!")
     @Email
     private String email;
 
-    @NotBlank
-    @Length(min = 5)
-    @NotNull
+    @NotBlank(message = "Anna kelvollinen käyttäjätunnus")
+    @Length(min = 5, message = "Käyttäjätunnuksen on oltava vähintään 5 merkkiä pitkä")
     @Column(unique = true)
     private String username;
 
     @NotBlank
-    @Length(min = 5)
-    @NotNull
+    @Length(min = 5, message = "Salasanan on oltava vähintään 5 merkkiä pitkä")
     private String password;
 
     @NotBlank
-    @Length(min = 10)
-    @NotNull
+    @Length(min = 10, message = "Esittelyn tulee olla vähintään 10 merkkiä pitkä")
     private String description;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created;
 
-    @OneToMany
+    @OneToMany(mappedBy = "employee")
     private List<EmployeeJobsApply> employeeJobsApply;
 
     public Employee() {

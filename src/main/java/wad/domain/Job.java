@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -27,35 +26,32 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Job extends AbstractPersistable<Long> {
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn
     private Categories cat;
 
     @ManyToOne
-    @JoinColumn(name = "employerId")
+    @JoinColumn
     private Employer emp;
 
     @ManyToOne
-    @JoinColumn(name = "typeId")
+    @JoinColumn
     private Types type;
 
-    @NotBlank
-    @Length(min = 3)
-    @NotNull
+    @NotBlank(message = "Anna duunin nimi")
+    @Length(min = 3, message = "nimen on oltava vähintään 3 merkkiä pitkä!")
     private String jobName;
 
-    @NotBlank
-    @Length(min = 10)
-    @NotNull
+    @NotBlank(message = "Anna duunin kuvaus!")
+    @Length(min = 10, message = "duunin kuvaus on oltava vähintään 10 merkkiä!")
     private String description;
 
-    @NotBlank
-    @NotNull
+    @NotBlank(message = "anna alue missä duuni on!")
     private String area;
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created;
 
-    @OneToMany
+    @OneToMany(mappedBy = "job")
     private List<EmployeeJobsApply> employeeJobsApply;
 
     public Job() {

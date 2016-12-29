@@ -28,7 +28,7 @@ public class Types extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String color;
 
-    @OneToMany
+    @OneToMany(mappedBy = "type")
     private List<Job> jobs;
 
     public Types() {
