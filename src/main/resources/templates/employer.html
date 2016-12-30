@@ -50,6 +50,12 @@
                         <a href="#" th:href="@{/login}">
                             Loggaa Sisään</a>
                     </li>
+                    <li class="right">
+                        <form th:action="@{/logout}" method="post">
+                        <button type='submit' name='logout' value='Logout'>
+                            Logout</button>
+                        </form>
+                    </li>
                 </ul>
             </div>
 
