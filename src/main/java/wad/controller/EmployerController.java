@@ -5,7 +5,6 @@
  */
 package wad.controller;
 
-import java.util.Date;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -39,30 +38,31 @@ public class EmployerController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String employerRegister(HttpSession session, @Valid @ModelAttribute("employer") Employer employer, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "redirect:/register";
         }
         try {
             Employer emp = employer;
             employerService.addEmployer(emp);
             session.setAttribute("employer", emp);
-            return "employer";
+            return "redirect:/employer";
 
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "register";
+            return "redirect:/register";
         }
     }
 
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public String loginEmployer(HttpSession session, RedirectAttributes redirect, @RequestParam String username, @RequestParam String password) {
+    /*@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    public String loginEmployer(HttpSession session, RedirectAttributes redirect, @RequestParam String username) {
+        session.invalidate();
         if (employerService.findByUsername(username) == null) {
             redirect.addAttribute("message", "Väärä käyttäjätunnus");
             return "redirect:/login";
         }
         Employer employer = employerService.findByUsername(username);
         session.setAttribute("employer", employer);
-        return "redirect:/employer/";
-    }
+        return "redirect:/employer";
+    }*/
 
     @RequestMapping(value = "/employer/logout", method = RequestMethod.POST)
     public String getLogout(HttpSession session) {
@@ -90,7 +90,7 @@ public class EmployerController {
             employerService.update(emp);
 
             redirectAttributes.addFlashAttribute("message", "Tiedot päivitetty onnistuneesti!");
-            return "redirect:/employer/{id}";
+            return "redirect:employer/{id}";
 
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("message", "Jotain meni pieleen " + e);
@@ -98,10 +98,11 @@ public class EmployerController {
         }
     }
 
-    @RequestMapping(value = "/employer/{id}", method = RequestMethod.GET)
-    public String employerDetailsPage(Model model, HttpSession session, @PathVariable Long id) {
-        Employer employer = employerService.findOne(id);
+    @RequestMapping(value = "/employer", method = RequestMethod.GET)
+    public String employerDetailsPage(Model model, HttpSession session) {
+        Employer employer = employerService.loggedIn();
         session.setAttribute("employer", employer);
+        model.addAttribute("employer", employer);
         model.addAttribute("employerJobs", jobService.allByEmployer(employerService.loggedIn().getUsername()));
         return "employer";
     }

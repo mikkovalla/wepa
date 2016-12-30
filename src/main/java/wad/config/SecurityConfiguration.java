@@ -31,13 +31,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console*/**").permitAll();
                 //.anyRequest().authenticated();
 
-        /*http.formLogin()
+        http.formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
                 .defaultSuccessUrl("/employer")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll();*/
+                .permitAll();
 
         http.logout()
                 .logoutUrl("/logout")
