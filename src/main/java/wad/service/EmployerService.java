@@ -60,8 +60,8 @@ public class EmployerService {
         return employerRepo.save(employer);
     }
 
-    public void delete(Long id) {
-        employerRepo.delete(employerRepo.findOne(id));
+    public void delete(Employer employer) {
+        employerRepo.delete(employerRepo.findOne(employer.getId()));
     }
 
     public Employer addEmployer(Employer employer) {

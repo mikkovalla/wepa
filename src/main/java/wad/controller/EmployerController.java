@@ -44,13 +44,12 @@ public class EmployerController {
         employerService.addEmployer(emp);
         return "redirect:/login";
     }
-
-    /*@RequestMapping(value = "/employer/logout", method = RequestMethod.POST)
+    @RequestMapping(value = "/employer/logout", method = RequestMethod.POST)
     public String getLogout(HttpSession session) {
         SecurityContextHolder.clearContext();
         session.invalidate();
         return "/";
-    }*/
+    }
 
     @RequestMapping(value = "/employer/update", method = RequestMethod.POST)
     public String employerUpdate(@Valid @ModelAttribute Employer employer,
@@ -91,11 +90,10 @@ public class EmployerController {
         return "employer";
     }
 
-    @RequestMapping(value = "/employer/delete", method = RequestMethod.DELETE)
-    public String deleteEmployer(RedirectAttributes redirectAttributes) {
+    @RequestMapping(value = "/employer/delete", method = RequestMethod.POST)
+    public String deleteEmployer() {
+        employerService.delete(employerService.loggedIn());
         SecurityContextHolder.clearContext();
-        employerService.delete(employerService.getLoggedInId());
-        redirectAttributes.addFlashAttribute("message", "Tietosi on poistettu palvelusta");
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

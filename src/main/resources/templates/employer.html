@@ -61,7 +61,7 @@
 
             <div class="col_12 column">
                 <h4>Tervetuloa <span th:text="${session.employer.companyName}">j</span></h4>
-                <form id="update_form_employer" method="post" th:action="@{/employer/{id}/update(id=${session.employer.id})}">
+                <form id="update_form_employer" method="post" th:action="@{/employer/update}">
                     <fieldset>
                         <legend>Muuta tietojasi</legend>
                         <p>
@@ -92,7 +92,7 @@
                 <form th:action="@{/employer/delete}" method="post">
                 <p class="right">
                         Tästä voit poistaa kaikki tietosi
-                        <input type="button" name="delete" value="Poista" class="large red"></input>
+                        <input type="submit" name="delete" value="Poista" class="large red"></input>
                     </p>
                 </form>
             </div>
