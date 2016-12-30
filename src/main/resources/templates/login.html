@@ -54,26 +54,7 @@
             </div>
             <div class="col_12 column">
                 <div class="col_5 column">
-                    <form id="login_form_employee" method="post" th:action="@{/login/employee}">
-                        <fieldset>
-                            <legend>Duunin Hakija kirjaudu</legend>
-                            <p>
-                                <label for="username_employee">Käyttäjätunnus</label>
-                                <input id="username_employee" name="username" type="text"/>
-                            </p>
-                            <p>
-                                <label for="password_employee">Salasana</label>
-                                <input id="password_employee" name="password" type="password"/>
-                            </p>
-                            <p>
-                                <input class="orange" type="submit" value="Lähetä"/>
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="col_1 column"></div>
-                <div class="col_5 column">
-                    <form id="login_form_employer" method="post" th:action="@{/login/employer}">
+                    <form id="login_form_employer" method="post" th:action="@{/authenticate}">
                         <fieldset>
                             <legend>Duunin tarjoaja kirjaudu</legend>
                             <p>

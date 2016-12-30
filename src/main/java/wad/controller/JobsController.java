@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import wad.repository.AreaRepository;
+import wad.repository.CategoriesRepository;
 import wad.service.JobService;
 
 /**
@@ -23,9 +25,17 @@ public class JobsController {
     @Autowired
     private JobService jobService;
 
+    @Autowired
+    private AreaRepository areaRepo;
+    
+    @Autowired
+    private CategoriesRepository catRepo;
+
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("jobs", jobService.all());
+        model.addAttribute("areas", areaRepo.findAll());
+        model.addAttribute("categories", catRepo.findAll());
         return "index";
     }
 

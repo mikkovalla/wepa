@@ -54,42 +54,7 @@
             </div>
             <div class="col_12 column">
                 <div class="col_5 column">
-                    <form id="reg_form_employee" th:action="@{/register/employee}" th:object="${employee}" method="POST">
-                        <fieldset>
-                            <legend>Duunin hakija luo tili</legend>
-                            <p>
-                                <label for="first_name">Etunimi</label>
-                                <input id="first_name" name="firstName" type="text"/>
-                            </p>
-                            <p>
-                                <label for="last_name">Sukunimi</label>
-                                <input id="last_name" name="lastname" type="text"/>
-                            </p>
-                            <p>
-                                <label for="email">Sähköposti</label>
-                                <input id="email" name="email" type="email"/>
-                            </p>
-                            <p>
-                                <label for="username">Käyttäjätunnus</label>
-                                <input id="username" name="username" type="text"/>
-                            </p>
-                            <p>
-                                <label for="password">Salasana</label>
-                                <input id="password" name="password" type="password"/>
-                            </p>
-                            <p>
-                                <label for="employee_description">Esittely</label>
-                                <textarea id="employee_description" name="description" rows="8" cols="40"></textarea>
-                            </p>
-                            <p>
-                                <input type="submit" value="Rekisteröidy Hakija" class="large orange"/>
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="col_1 column"></div>
-                <div class="col_5 column">
-                    <form id="reg_form_employer" th:action="@{/register/employer}" th:object="${employer}" method="post">
+                    <form id="reg_form_employer" th:action="@{/register}" th:object="${employer}" method="post">
                         <fieldset>
                             <legend>Duunin tarjoaja luo tili</legend>
                             <p>

@@ -5,13 +5,10 @@
  */
 package wad.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.Length;
@@ -37,6 +34,10 @@ public class Job extends AbstractPersistable<Long> {
     @JoinColumn
     private Types type;
 
+    @ManyToOne
+    @JoinColumn
+    private Area area;
+
     @NotBlank(message = "Anna duunin nimi")
     @Length(min = 3, message = "nimen on oltava vähintään 3 merkkiä pitkä!")
     private String jobName;
@@ -45,25 +46,19 @@ public class Job extends AbstractPersistable<Long> {
     @Length(min = 10, message = "duunin kuvaus on oltava vähintään 10 merkkiä!")
     private String description;
 
-    @NotBlank(message = "anna alue missä duuni on!")
-    private String area;
-
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date created;
-
-    @OneToMany(mappedBy = "job")
-    private List<EmployeeJobsApply> employeeJobsApply;
 
     public Job() {
     }
 
-    public Job(Categories cat, Employer emp, Types type, String jobName, String description, String area) {
+    public Job(Categories cat, Employer emp, Types type, Area area, String jobName, String description) {
         this.cat = cat;
         this.emp = emp;
         this.type = type;
+        this.area = area;
         this.jobName = jobName;
         this.description = description;
-        this.area = area;
         this.created = new Date();
     }
 
@@ -107,11 +102,11 @@ public class Job extends AbstractPersistable<Long> {
         this.description = description;
     }
 
-    public String getArea() {
+    public Area getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(Area area) {
         this.area = area;
     }
 
@@ -121,16 +116,5 @@ public class Job extends AbstractPersistable<Long> {
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public List<EmployeeJobsApply> getEmployeeJobsApply() {
-        if (this.employeeJobsApply == null) {
-            this.employeeJobsApply = new ArrayList<>();
-        }
-        return employeeJobsApply;
-    }
-
-    public void setEmployeeJobsApply(List<EmployeeJobsApply> employeeJobsApply) {
-        this.employeeJobsApply = employeeJobsApply;
     }
 }

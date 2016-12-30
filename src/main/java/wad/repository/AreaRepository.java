@@ -6,13 +6,12 @@
 package wad.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import wad.domain.Employee;
+import wad.domain.Area;
 
 /**
  *
  * @author mikko
  */
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-
-    Employee findByUsername(String username);
+public interface AreaRepository extends JpaRepository<Area, Long>{
+    
 }

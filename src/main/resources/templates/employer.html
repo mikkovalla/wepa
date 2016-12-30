@@ -1,0 +1,121 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- META -->
+        <title>DuuniHaKuRi | Duunia Kaikille</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content=""/>
+
+        <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="../../css/kickstart.css" th:href="@{/css/kickstart.css}" media="all"/>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css" th:href="@{/css/style.css}" media="all"/>
+
+        <!-- Javascript -->
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../../js/kickstart.js" th:src="@{/js/kickstart.js}"></script>
+    </head>
+    <body>
+        <div id="container" class="grid">
+            <header>
+                <div class="col_6 column">
+                    <h1>
+                        <a href="#" th:href="@{/}">
+                            <strong>Duuni</strong>HaKuRi</a>
+                    </h1>
+                </div>
+                <div class="col_6 column right">
+                    <form id="add_job">
+                        <button class="large blue">
+                            <a href="#" id="addjob_button">Lisää Duuni</a>
+                        </button>
+                    </form>
+                </div>
+            </header>
+
+            <div class="col_12 column">
+                <!-- Menu palkki -->
+                <ul class="menu">
+                    <li class="current">
+                        <a href="#" th:href="@{/}">
+                            Koti</a>
+                    </li>
+                    <li>
+                        <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
+                    </li>
+                    <li class="right">
+                        <a href="#" th:href="@{/register}">
+                            Rekisteröidy</a>
+                    </li>
+                    <li class="right">
+                        <a href="#" th:href="@{/login}">
+                            Loggaa Sisään</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col_12 column">
+                <h4>Tervetuloa <span th:text="${session.employer.companyName}">j</span></h4>
+                <form id="update_form_employer" method="post" th:action="@{/employer/{id}/update(id=${session.employer.id})}">
+                    <fieldset>
+                        <legend>Muuta tietojasi</legend>
+                        <p>
+                            <label for="company">Yrityksen nimi</label>
+                            <input id="company" name="companyName" type="text" th:value="${session.employer.companyName}"/>
+                        </p>
+                        <p>
+                            <label for="email_company">Sähköposti</label>
+                            <input id="email_company" name="email" type="email" th:value="${session.employer.email}"/>
+                        </p>
+                        <p>
+                            <label for="username_company">Käyttäjätunnus</label>
+                            <input id="username_company" name="username" type="text" th:value="${session.employer.username}"/>
+                        </p>
+                        <p>
+                            <label for="password_company">Salasana</label>
+                            <input id="password_company" name="password" type="password" th:value="${session.employer.password}"/>
+                        </p>
+                        <p>
+                            <label for="company_description">Yritys esittely</label>
+                            <textarea id="company_description" name="companyDescription" rows="8" cols="40" th:text="${session.employer.companyDescription}"></textarea>
+                        </p>
+                        <p>
+                            <input type="submit" value="update" class="large blue"></input>
+                        </p>
+                    </fieldset>
+                </form>
+                <form th:action="@{/employer/delete}" method="post">
+                <p class="right">
+                        Tästä voit poistaa kaikki tietosi
+                        <input type="button" name="delete" value="Poista" class="large red"></input>
+                    </p>
+                </form>
+            </div>
+            <div class="col_12 column">
+                <h5>Lisäämäni duunit</h5>
+                <ul id="listings">
+                    <li>
+                        <div class="type">
+                            <span class="blue">
+                                TäysPäivä</span>
+                        </div>
+                        <div class="description">
+                            <h5>Graafinen suunnittelija (Espoo)</h5>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.<a href="details.html">
+                                Lisää...</a>
+                            <p>
+                                <input type="submit" name="delete" value="Poista" method="post" class="orange"></input>
+                                <input type="submit" name="update" value="Muokkaa" method="post" class="green"></input>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <footer>
+                <p>Copyright 2016, DuuniHakuri... eiku ei mitään copuraitteja :-D</p>
+            </footer>
+        </div>
+        <!-- End Grid -->
+    </body>
+</html>
+

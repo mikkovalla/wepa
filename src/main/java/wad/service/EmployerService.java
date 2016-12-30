@@ -25,6 +25,9 @@ public class EmployerService {
     @Autowired
     EmployerRepository employerRepo;
 
+    @Autowired
+    private LoggedInEmployerService employerLoggedIn;
+
     @PostConstruct
     public void init() {
         // demo content
@@ -45,6 +48,10 @@ public class EmployerService {
         return employerRepo.findByEmail(email);
     }
 
+    public Employer findByPassword(String password) {
+        return employerRepo.findByEmail(password);
+    }
+
     public List<Employer> all() {
         return employerRepo.findAll();
     }
@@ -61,8 +68,11 @@ public class EmployerService {
         return employerRepo.save(employer);
     }
 
-    public Employer getAuthenticatedPerson() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return employerRepo.findByUsername(((Employer) authentication.getPrincipal()).getUsername());
+    public Employer loggedIn() {
+        return employerLoggedIn.getEmployerLoggedIn();
+    }
+
+    public Long getLoggedInId() {
+        return employerRepo.findByUsername(employerLoggedIn.getEmployerLoggedIn().getUsername()).getId();
     }
 }

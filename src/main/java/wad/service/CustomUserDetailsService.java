@@ -7,7 +7,6 @@ package wad.service;
 
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,20 +16,18 @@ import wad.repository.EmployerRepository;
 
 /**
  *
- * @author Mikko
+ * @author mikko
  */
-@Service
-public class CustomEmployerDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private EmployerRepository employerRepository;
+    private EmployerRepository employerRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Employer employer = employerRepository.findByUsername(username);
-
+        Employer employer = employerRepo.findByUsername(username);
         if (employer == null) {
-            throw new UsernameNotFoundException("Käyttäjä ei löydy: " + username);
+            throw new UsernameNotFoundException("No such user: " + username);
         }
 
         return new org.springframework.security.core.userdetails.User(
@@ -40,7 +37,7 @@ public class CustomEmployerDetailsService implements UserDetailsService {
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority("EMPLOYER")));
+                Arrays.asList(new SimpleGrantedAuthority(employer.getAuthority())));
     }
 
 }

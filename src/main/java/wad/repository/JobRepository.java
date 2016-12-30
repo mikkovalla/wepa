@@ -5,6 +5,7 @@
  */
 package wad.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import wad.domain.Job;
 
@@ -12,6 +13,7 @@ import wad.domain.Job;
  *
  * @author mikko
  */
-public interface JobRepository extends JpaRepository<Job, Long>{
-    
+public interface JobRepository extends JpaRepository<Job, Long> {
+
+    List<Job> findByEmp_Username(String username);
 }

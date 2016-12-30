@@ -6,15 +6,13 @@
 package wad.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import wad.auth.JpaAuthenticationProvider;
 
 /**
  *
@@ -24,43 +22,39 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService employeeDetailsService;
-
-    @Autowired
-    private UserDetailsService employerDetailsService;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().sameOrigin();
+        http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/*").permitAll();
-        //.antMatchers("/jobs").permitAll()
-        //.antMatchers("/login").permitAll()
-        //.antMatchers("/register").permitAll()
-        //.antMatchers("/employer/*").hasAnyRole("EMPLOYER")
-        //.antMatchers("/employee/*").hasAnyRole("EMPLOYEE")
-        //.anyRequest().authenticated();
-        http.formLogin()
+                .antMatchers("/*", "/login", "/register", "/resources/**").permitAll()
+                .antMatchers("/h2-console*/**").permitAll();
+                //.anyRequest().authenticated();
+
+        /*http.formLogin()
                 .loginPage("/login")
+                .loginProcessingUrl("/authenticate")
+                .defaultSuccessUrl("/employer")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .permitAll();
+                .permitAll();*/
 
         http.logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/index")
                 .permitAll()
                 .invalidateHttpSession(true);
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(employeeDetailsService).passwordEncoder(passwordEncoder());
-        auth.userDetailsService(employerDetailsService).passwordEncoder(passwordEncoder());
-    }
+    @Configuration
+    protected static class AuthenticationConfiguration extends GlobalAuthenticationConfigurerAdapter {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        @Autowired
+        private JpaAuthenticationProvider jpaAuthenticationProvider;
+
+        @Override
+        public void init(AuthenticationManagerBuilder auth) throws Exception {
+            auth.authenticationProvider(jpaAuthenticationProvider);
+        }
     }
 }

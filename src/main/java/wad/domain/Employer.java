@@ -8,17 +8,16 @@ package wad.domain;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
  *
@@ -55,6 +54,10 @@ public class Employer extends AbstractPersistable<Long> {
 
     @OneToMany(mappedBy = "emp")
     private List<Job> jobs;
+
+    private String salt;
+
+    private String authority;
 
     public Employer() {
     }
@@ -97,7 +100,16 @@ public class Employer extends AbstractPersistable<Long> {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.salt = BCrypt.gensalt();
+        this.password = BCrypt.hashpw(password, this.salt);
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public String getCompanyDescription() {
@@ -127,32 +139,11 @@ public class Employer extends AbstractPersistable<Long> {
         this.jobs = jobs;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + Objects.hashCode(this.companyName);
-        hash = 59 * hash + Objects.hashCode(this.username);
-        return hash;
+    public String getAuthority() {
+        return authority;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Employer other = (Employer) obj;
-        if (!Objects.equals(this.companyName, other.companyName)) {
-            return false;
-        }
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
-        return true;
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }
