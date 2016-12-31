@@ -37,7 +37,7 @@ public class Job extends AbstractPersistable<Long> {
     @JoinColumn
     private Types type;
 
-    @ManyToMany(mappedBy = "jobs")
+    @ManyToMany
     private List<Area> areas;
 
     @NotBlank(message = "Anna duunin nimi")

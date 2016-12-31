@@ -21,7 +21,7 @@ public class Area extends AbstractPersistable<Long> {
 
     private String name;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "areas")
     private List<Job> jobs;
 
     public Area() {
