@@ -82,7 +82,7 @@
                         </p>
                         <p>
                             <label for="area_select">Missä duuni sijaitsee</label>
-                            <select id="area_select" name="areaId">
+                            <select id="area_select" name="areas" multiple="true">
                                 <option th:each="area : ${areas}" 
                                         th:value="${area.id}" 
                                         th:text="${area.name}">

@@ -7,8 +7,9 @@ package wad.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 /**
@@ -20,7 +21,7 @@ public class Area extends AbstractPersistable<Long> {
 
     private String name;
 
-    @OneToMany(mappedBy = "area")
+    @ManyToMany
     private List<Job> jobs;
 
     public Area() {
@@ -39,6 +40,10 @@ public class Area extends AbstractPersistable<Long> {
     }
 
     public List<Job> getJobs() {
+        if (this.jobs == null) {
+            this.jobs = new ArrayList<Job>() {
+            };
+        }
         return jobs;
     }
 
@@ -47,6 +52,32 @@ public class Area extends AbstractPersistable<Long> {
             this.jobs = new ArrayList<>();
         }
         this.jobs = jobs;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.jobs);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Area other = (Area) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.jobs, other.jobs)) {
+            return false;
+        }
+        return true;
     }
 
 }

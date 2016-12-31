@@ -134,7 +134,7 @@
                                 TäysPäivä</span>
                         </div>
                         <div class="description">
-                            <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:text="${job.area.name}"></h6>
+                            <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:each="area : ${job.areas}" th:text="${area.name}"></h6>
                             <h6 th:text="${job.category.name}"></h6>
                             <p th:text="${job.description}"></p><a href="#" th:href="@{/jobs/{id}(id=${job.id})}">
                                 Lisää...</a>

@@ -5,6 +5,8 @@
  */
 package wad.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,7 @@ public class JobsController {
     private EmployerService employerService;
 
     @RequestMapping("/")
-    public String index(Model model) {
+    public String index(Model model) { 
         model.addAttribute("jobs", jobService.all());
         model.addAttribute("areas", areaRepo.findAll());
         model.addAttribute("categories", catRepo.findAll());
@@ -99,7 +101,7 @@ public class JobsController {
             BindingResult bindingResult, HttpSession session,
             Model model,
             @RequestParam Long typeId,
-            @RequestParam Long areaId,
+            @RequestParam List<Area> areas,
             @RequestParam Long categoryId) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("errors", bindingResult.getAllErrors());
@@ -107,10 +109,10 @@ public class JobsController {
         }
         Employer emp = (Employer) session.getAttribute("employer");
         Categories cat = catRepo.findOne(categoryId);
-        Area area = areaRepo.findOne(areaId);
         Types type = typeRepo.findOne(typeId);
+        areas = new ArrayList<>();
 
-        Job jobi = new Job(cat, emp, type, area, job.getJobName(), job.getDescription());
+        Job jobi = new Job(cat, emp, type, areas, job.getJobName(), job.getDescription());
         jobService.save(jobi);
         return "redirect:/employer";
     }

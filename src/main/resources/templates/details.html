@@ -89,9 +89,9 @@
                         <strong>Yritys:</strong>
                         [[${job.employer.companyName}]]
                     </li>
-                    <li th:inline="text">
+                    <li th:inline="text" th:each="area : ${job.areas}">
                         <strong>Sijainti:</strong>
-                        [[${job.area.name}]]
+                        [[${area.name}]]
                     </li>
                     <li th:inline="text">
                         <strong>Tyyppi:</strong>

@@ -5,9 +5,12 @@
  */
 package wad.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,9 +37,8 @@ public class Job extends AbstractPersistable<Long> {
     @JoinColumn
     private Types type;
 
-    @ManyToOne
-    @JoinColumn
-    private Area area;
+    @ManyToMany(mappedBy = "jobs")
+    private List<Area> areas;
 
     @NotBlank(message = "Anna duunin nimi")
     @Length(min = 3, message = "nimen on oltava vähintään 3 merkkiä pitkä!")
@@ -52,14 +54,28 @@ public class Job extends AbstractPersistable<Long> {
     public Job() {
     }
 
-    public Job(Categories category, Employer emp, Types type, Area area, String jobName, String description) {
+    public Job(Categories category, Employer emp, Types type, List<Area> areas, String jobName, String description) {
         this.category = category;
         this.emp = emp;
         this.type = type;
-        this.area = area;
+        this.areas = areas;
         this.jobName = jobName;
         this.description = description;
         this.created = new Date();
+    }
+
+    public List<Area> getAreas() {
+        if (this.areas == null) {
+            this.areas = new ArrayList<>();
+        }
+        return areas;
+    }
+
+    public void setAreas(List<Area> areas) {
+        if (this.areas == null) {
+            this.areas = new ArrayList<>();
+        }
+        this.areas = areas;
     }
 
     public Categories getCategory() {
@@ -100,14 +116,6 @@ public class Job extends AbstractPersistable<Long> {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Area getArea() {
-        return area;
-    }
-
-    public void setArea(Area area) {
-        this.area = area;
     }
 
     public Date getCreated() {
