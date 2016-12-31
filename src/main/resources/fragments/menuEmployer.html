@@ -1,0 +1,15 @@
+<ul class="menu">
+        <li class="current">
+            <a href="#" th:href="@{/}">
+                Koti</a>
+        </li>
+        <li>
+            <a href="#" th:href="@{/employer}">Sivuni</a>
+        </li>
+        <li class="right">
+            <form th:action="@{/logout}" method="post">
+                <button type='submit' name='logout' value='Logout'>
+                    Logout</button>
+            </form>
+        </li>
+    </ul>

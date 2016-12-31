@@ -24,7 +24,7 @@ public class Job extends AbstractPersistable<Long> {
 
     @ManyToOne
     @JoinColumn
-    private Categories cat;
+    private Categories category;
 
     @ManyToOne
     @JoinColumn
@@ -52,8 +52,8 @@ public class Job extends AbstractPersistable<Long> {
     public Job() {
     }
 
-    public Job(Categories cat, Employer emp, Types type, Area area, String jobName, String description) {
-        this.cat = cat;
+    public Job(Categories category, Employer emp, Types type, Area area, String jobName, String description) {
+        this.category = category;
         this.emp = emp;
         this.type = type;
         this.area = area;
@@ -63,11 +63,11 @@ public class Job extends AbstractPersistable<Long> {
     }
 
     public Categories getCategory() {
-        return cat;
+        return category;
     }
 
-    public void setCategory(Categories cat) {
-        this.cat = cat;
+    public void setCategory(Categories category) {
+        this.category = category;
     }
 
     public Employer getEmployer() {

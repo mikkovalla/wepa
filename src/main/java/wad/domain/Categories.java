@@ -20,7 +20,7 @@ public class Categories extends AbstractPersistable<Long> {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "cat")
+    @OneToMany(mappedBy = "category")
     private List<Job> jobs;
 
     public Categories() {

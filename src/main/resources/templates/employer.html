@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <head>
         <!-- META -->
         <title>DuuniHaKuRi | Duunia Kaikille</title>
@@ -24,9 +24,9 @@
                     </h1>
                 </div>
                 <div class="col_6 column right">
-                    <form id="add_job">
+                    <form id="add_job" sec:authorize="hasAuthority('EMPLOYER')">
                         <button class="large blue">
-                            <a href="#" id="addjob_button">Lisää Duuni</a>
+                            <a href="#" th:href ="@{/jobs/addjob}" id="addjob_button">Lisää Duuni</a>
                         </button>
                     </form>
                 </div>
@@ -39,24 +39,48 @@
                         <a href="#" th:href="@{/}">
                             Koti</a>
                     </li>
-                    <li>
+                    <li sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
                     </li>
-                    <li class="right">
+                    <li sec:authorize='isAuthenticated()'>
+                        <a href="#" th:href="@{/employer}">Omat Sivut</a>
+                    </li>
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/register}">
                             Rekisteröidy</a>
                     </li>
-                    <li class="right">
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/login}">
                             Loggaa Sisään</a>
                     </li>
-                    <li class="right">
+                    <li class="right" sec:authorize='isAuthenticated()'>
                         <form th:action="@{/logout}" method="post">
-                        <button type='submit' name='logout' value='Logout'>
-                            Logout</button>
+                            <button type='submit' name='logout' value='Logout'>
+                                Logout</button>
                         </form>
                     </li>
                 </ul>
+            </div>
+
+            <div id="search_area" class="col_12 column" sec:authorize='isAnonymous()'>
+                <form class="horizontal" method="post" action="#">
+                    <input id="keywords" type="text" placeholder="Mitä duunia haetaan?"/>
+                    <select id="area_select">
+                        <option th:each="area : ${areas}" 
+                                th:value="${area.name}" 
+                                th:text="${area.name}">
+                            Mistä päin?
+                        </option>
+                    </select>
+                    <select id="category_select">
+                        <option th:each="cat : ${categories}" 
+                                th:value="${cat.name}" 
+                                th:text="${cat.name}">
+                            Mitä?
+                        </option>
+                    </select>
+                    <button class="large blue" type="submit">Hae</button>
+                </form>
             </div>
 
             <div class="col_12 column">
@@ -90,7 +114,7 @@
                     </fieldset>
                 </form>
                 <form th:action="@{/employer/delete}" method="post">
-                <p class="right">
+                    <p class="right">
                         Tästä voit poistaa kaikki tietosi
                         <input type="submit" name="delete" value="Poista" class="large red"></input>
                     </p>
@@ -98,17 +122,21 @@
             </div>
             <div class="col_12 column">
                 <h5>Lisäämäni duunit</h5>
-                <ul id="listings">
+                <ul id="listings" th:each="job : ${employerJobs}">
                     <li>
-                        <div class="type">
-                            <span class="blue">
+                        <div class="type" th:switch="${job.type.name}">
+                            <span th:case=" 'Täys päivä' " style="background-color: #4c9ef1" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                            <span th:case=" 'Osa-aika' " style="background-color: #81b800" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                            <span th:case="*" style="background-color: #f4a209" th:text="${job.type.name}">
                                 TäysPäivä</span>
                         </div>
                         <div class="description">
-                            <h5>Graafinen suunnittelija (Espoo)</h5>
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.<a href="details.html">
-                                Lisää...</a>
-                            <p>
+                            <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:text="${job.area.name}"></h6>
+                            <h6 th:text="${job.category.name}"></h6>
+                            <p th:text="${job.description}"></p><a href="#" th:href="@{/jobs/{id}(id=${job.id})}">
+                                Lisää...</a><p>
                                 <input type="submit" name="delete" value="Poista" method="post" class="orange"></input>
                                 <input type="submit" name="update" value="Muokkaa" method="post" class="green"></input>
                             </p>

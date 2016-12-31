@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <head>
         <!-- META -->
         <title>DuuniHaKuRi | Duunia Kaikille</title>
@@ -24,9 +24,9 @@
                     </h1>
                 </div>
                 <div class="col_6 column right">
-                    <form id="add_job">
+                    <form id="add_job" sec:authorize="hasAuthority('EMPLOYER')">
                         <button class="large blue">
-                            <a href="#" id="addjob_button">Lisää Duuni</a>
+                            <a href="#" th:href ="@{/jobs/addjob}" id="addjob_button">Lisää Duuni</a>
                         </button>
                     </form>
                 </div>
@@ -39,43 +39,45 @@
                         <a href="#" th:href="@{/}">
                             Koti</a>
                     </li>
-                    <li>
+                    <li sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
                     </li>
-                    <li class="right">
+                    <li sec:authorize='isAuthenticated()'>
+                        <a href="#" th:href="@{/employer}">Omat Sivut</a>
+                    </li>
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/register}">
                             Rekisteröidy</a>
                     </li>
-                    <li class="right">
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/login}">
                             Loggaa Sisään</a>
+                    </li>
+                    <li class="right" sec:authorize='isAuthenticated()'>
+                        <form th:action="@{/logout}" method="post">
+                            <button type='submit' name='logout' value='Logout'>
+                                Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>
 
-            <div id="search_area" class="col_12 column">
+            <div id="search_area" class="col_12 column" sec:authorize='isAnonymous()'>
                 <form class="horizontal" method="post" action="#">
                     <input id="keywords" type="text" placeholder="Mitä duunia haetaan?"/>
                     <select id="area_select">
-                        <option>Mistä päin?</option>
-                        <option value="espoo">Espoo</option>
-                        <option value="helsinki">Helsinki</option>
-                        <option value="vantaa">Vantaa</option>
-                        <option value="turku">Turku</option>
-                        <option value="lappeenranta">Lappeenranta</option>
-                        <option value="tampere">Tampere</option>
-                        <option value="jyvaskyla">Jyväskylä</option>
-                        <option value="oulu">Oulu</option>
+                        <option th:each="area : ${areas}" 
+                                th:value="${area.name}" 
+                                th:text="${area.name}">
+                            Mistä päin?
+                        </option>
                     </select>
                     <select id="category_select">
-                        <option>Miltä alalta?</option>
-                        <option>Front-end devaaja</option>
-                        <option>Back-end devaaja</option>
-                        <option>UI designeri</option>
-                        <option>Fullstack guru</option>
-                        <option>Pelin rakentaja</option>
-                        <option>iOS / Android / Mobile osaaja</option>
-                        <option>Wordpress / Magento / Joomla / ECommerce häkkääjä</option>
+                        <option th:each="cat : ${categories}" 
+                                th:value="${cat.name}" 
+                                th:text="${cat.name}">
+                            Mitä?
+                        </option>
                     </select>
                     <button class="large blue" type="submit">Hae</button>
                 </form>
@@ -89,7 +91,7 @@
                     </li>
                     <li th:inline="text">
                         <strong>Sijainti:</strong>
-                        [[${job.area}]]
+                        [[${job.area.name}]]
                     </li>
                     <li th:inline="text">
                         <strong>Tyyppi:</strong>
@@ -107,37 +109,18 @@
                         <strong>Lähetä meili:</strong>
                         <a href="#" target="_top" th:text="${job.employer.email}">joku@jokulafka.fi</a>
                     </li>
-                    <li>
-                        <!--show button for employee session -->
-                        <button class="large blue" type="button" name="apply_job" method="post">Hae duunia</button>
-                    </li>
-                    <li class="right">
-                        <!-- show button for employer session -->
-                        <button class="large red" type="button" name="destroy_job" method="post">Poista</button>
+                    <li class="right" sec:authorize="hasAuthority('EMPLOYER')">
+                        <form th:action="@{/jobs/{id}/delete(id=${job.id})}" method="post">
+                            <button class="large red" type="submit" name="destroy_job">Poista</button>
+                        </form> 
+
                     </li>
                 </ul>
                 <p>
                     <a th:href="@{/jobs}">Takaisin selailemaan...</a>
                 </p>
             </div>
-            <!--Employer session view show applicants-->
-            <div class="col_12 column">
-                <h5>Hakijat</h5>
-                <ul>
-                    <li>
-                        <strong>Nimi:</strong>
-                        Etunimi Sukunimi</li>
-                    <li>
-                        <strong>Esittely:</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dapibus risus at dapibus malesuada. Vestibulum euismod, velit sit amet tempor ornare, nulla augue mattis mi, nec ultricies dolor augue nec lectus. Integer bibendum enim ipsum.</p>
-                    </li>
-                    <li>
-                        <strong>Lähetä meili:</strong>
-                        <a href="mailto:joku@jokulafka.fi?Subject=Job%20Applicant" target="_top">etunimisukunimi@moikkamoi.fi</a>
-                    </li>
-                </ul>
-            </div>
-            <!--employer session end -->
+
             <div class="clearfix"></div>
             <footer>
                 <p>Copyright 2016, DuuniHakuri... eiku ei mitään copuraitteja :-D</p>

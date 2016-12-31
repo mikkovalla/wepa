@@ -62,25 +62,53 @@
                 </ul>
             </div>
             <div class="col_12 column">
-                <div class="col_5 column">
-                    <form id="login_form_employer" method="post" th:action="@{/authenticate}">
-                        <fieldset>
-                            <legend>Duunin tarjoaja kirjaudu</legend>
-                            <p th:if="${error}" th:text="${error}">no errors</p>
-                            <p>
-                                <label for="username_employer">Käyttäjätunnus</label>
-                                <input id="username_employer" name="username" type="text"/>
-                            </p>
-                            <p>
-                                <label for="password_employer">Salasana</label>
-                                <input id="password_employer" name="password" type="password"/>
-                            </p>
-                            <p>
-                                <input class="green" type="submit" value="Lähetä"/>
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
+                <form id="add_job_form_employer" th:action="@{/addjob}" method="post" th:object="${job}">
+                    <fieldset>
+                        <legend>Lisää duuni</legend>
+                       <!--<input name="employerId" th:value="${session.employer.id}" type="hidden">-->
+                        <p>
+                            <label for="job_name">Duunin nimi</label>
+                            <input id="job_name" name="jobName" type="text" th:field="*{jobName}"/>
+                        </p>
+                        <p>
+                            <label for="job_type">Duunin tyyppi</label>
+                            <select id="job_type" name="typeId">
+                                <option th:each="type : ${types}" 
+                                        th:value="${type.id}" 
+                                        th:text="${type.name}">
+                                    Mistä päin?
+                                </option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="area_select">Missä duuni sijaitsee</label>
+                            <select id="area_select" name="areaId">
+                                <option th:each="area : ${areas}" 
+                                        th:value="${area.id}" 
+                                        th:text="${area.name}">
+                                    Mistä päin?
+                                </option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="category_select">Mikä ala</label>
+                            <select id="category_select" name="categoryId">
+                                <option th:each="cat : ${categories}" 
+                                        th:value="${cat.id}" 
+                                        th:text="${cat.name}">
+                                    Mitä?
+                                </option>
+                            </select>
+                        </p>
+                        <p>
+                            <label for="job_description">Duunin kuvaus</label>
+                            <textarea id="job_description" name="description" th:field="*{description}"></textarea>
+                        </p>
+                        <p>
+                            <input class="blue" type="submit" value="Lisää duuni"/>
+                        </p>
+                    </fieldset>
+                </form>
             </div>
             <div class="clearfix"></div>
             <footer>
@@ -90,4 +118,3 @@
         <!-- End Grid -->
     </body>
 </html>
-

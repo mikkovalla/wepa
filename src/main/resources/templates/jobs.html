@@ -24,7 +24,7 @@
                     </h1>
                 </div>
                 <div class="col_6 column right">
-                    <form id="add_job" sec:authorize="hasAuthority('EMPLOYER')">
+                    <form id="add_job" sec:authorize="hasRole('EMPLOYER')">
                         <button class="large blue">
                             <a href="#" th:href ="@{/jobs/addjob}" id="addjob_button">Lisää Duuni</a>
                         </button>
@@ -61,26 +61,48 @@
                     </li>
                 </ul>
             </div>
+
+            <div id="search_area" class="col_12 column" sec:authorize='isAnonymous()'>
+                <form class="horizontal" method="post" action="#">
+                    <input id="keywords" type="text" placeholder="Mitä duunia haetaan?"/>
+                    <select id="area_select">
+                        <option th:each="area : ${areas}" 
+                                th:value="${area.name}" 
+                                th:text="${area.name}">
+                            Mistä päin?
+                        </option>
+                    </select>
+                    <select id="category_select">
+                        <option th:each="cat : ${categories}" 
+                                th:value="${cat.name}" 
+                                th:text="${cat.name}">
+                            Mitä?
+                        </option>
+                    </select>
+                    <button class="large blue" type="submit">Hae</button>
+                </form>
+            </div>
+
             <div class="col_12 column">
-                <div class="col_5 column">
-                    <form id="login_form_employer" method="post" th:action="@{/authenticate}">
-                        <fieldset>
-                            <legend>Duunin tarjoaja kirjaudu</legend>
-                            <p th:if="${error}" th:text="${error}">no errors</p>
-                            <p>
-                                <label for="username_employer">Käyttäjätunnus</label>
-                                <input id="username_employer" name="username" type="text"/>
-                            </p>
-                            <p>
-                                <label for="password_employer">Salasana</label>
-                                <input id="password_employer" name="password" type="password"/>
-                            </p>
-                            <p>
-                                <input class="green" type="submit" value="Lähetä"/>
-                            </p>
-                        </fieldset>
-                    </form>
-                </div>
+                <h3>Tälläsiä olis tällä hetkellä tarjolla</h3>
+                <ul id="listings" th:each="job : ${jobs}">
+                    <li>
+                        <div class="type" th:switch="${job.type.name}">
+                            <span th:case=" 'Täys päivä' " style="background-color: #4c9ef1" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                            <span th:case=" 'Osa-aika' " style="background-color: #81b800" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                            <span th:case="*" style="background-color: #f4a209" th:text="${job.type.name}">
+                                TäysPäivä</span>
+                        </div>
+                        <div class="description">
+                            <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:text="${job.area.name}"></h6>
+                            <h6 th:text="${job.category.name}"></h6>
+                            <p th:text="${job.description}"></p><a href="#" th:href="@{/jobs/{id}(id=${job.id})}">
+                                Lisää...</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="clearfix"></div>
             <footer>
@@ -90,4 +112,5 @@
         <!-- End Grid -->
     </body>
 </html>
+
 

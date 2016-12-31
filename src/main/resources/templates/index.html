@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <head>
         <!-- META -->
         <title>DuuniHaKuRi | Duunia Kaikille</title>
@@ -24,9 +24,9 @@
                     </h1>
                 </div>
                 <div class="col_6 column right">
-                    <form id="add_job">
+                    <form id="add_job" sec:authorize="hasAuthority('EMPLOYER')">
                         <button class="large blue">
-                            <a href="#" id="addjob_button">Lisää Duuni</a>
+                            <a href="#" th:href ="@{/jobs/addjob}" id="addjob_button">Lisää Duuni</a>
                         </button>
                     </form>
                 </div>
@@ -39,21 +39,30 @@
                         <a href="#" th:href="@{/}">
                             Koti</a>
                     </li>
-                    <li>
+                    <li sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
                     </li>
-                    <li class="right">
+                    <li sec:authorize='isAuthenticated()'>
+                        <a href="#" th:href="@{/employer}">Omat Sivut</a>
+                    </li>
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/register}">
                             Rekisteröidy</a>
                     </li>
-                    <li class="right">
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/login}">
                             Loggaa Sisään</a>
+                    </li>
+                    <li class="right" sec:authorize='isAuthenticated()'>
+                        <form th:action="@{/logout}" method="post">
+                            <button type='submit' name='logout' value='Logout'>
+                                Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>
 
-            <div id="search_area" class="col_12 column">
+            <div id="search_area" class="col_12 column" sec:authorize='isAnonymous()'>
                 <form class="horizontal" method="post" action="#">
                     <input id="keywords" type="text" placeholder="Mitä duunia haetaan?"/>
                     <select id="area_select">

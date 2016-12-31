@@ -55,18 +55,17 @@ public class JobService {
         Types t1 = typeRepo.save(new Types("Täys päivä", "#4c9ef1"));
         Types t2 = typeRepo.save(new Types("Osa-aika", "#81b800"));
         Types t3 = typeRepo.save(new Types("Freelancer", "#f4f4f4"));
-        
+
         Area a1 = areaRepo.save(new Area("Espoo"));
         Area a2 = areaRepo.save(new Area("Helsinki"));
         Area a3 = areaRepo.save(new Area("Tampere"));
         Area a4 = areaRepo.save(new Area("Vantaa"));
         Area a5 = areaRepo.save(new Area("Oulu"));
         Area a6 = areaRepo.save(new Area("Turku"));
-        
+
         Employer e1 = employerRepo.save(new Employer("JavaGurut", "java@java.com", "javaguru", "javaguru", "javagurut on hieno lafka", new Date()));
         Employer e2 = employerRepo.save(new Employer("Osaajat", "osaajat@osaajat.com", "osaajat", "osaajat", "osaajat on hieno lafka", new Date()));
         Employer e3 = employerRepo.save(new Employer("KoodinVääntäjät", "css@css.com", "csshtml", "csshtml", "jKoodinvääntäjät on hieno lafka joka osaa", new Date()));
-    
 
         Job job1 = new Job(c1, e1, t1, a1,
                 "Html ja Css taituri",
@@ -86,7 +85,7 @@ public class JobService {
                 + "Suspendisse dapibus risus at dapibus malesuada. "
                 + "Vestibulum euismod, velit sit amet tempor ornare, "
                 + "nulla augue mattis mi, nec ultricies dolor augue nec lectus.");
-        
+
         jobRepo.save(job1);
         jobRepo.save(job2);
         jobRepo.save(job3);
@@ -106,5 +105,9 @@ public class JobService {
 
     public List<Job> allByEmployer(String username) {
         return jobRepo.findByEmp_Username(username);
+    }
+
+    public void save(Job job) {
+        jobRepo.save(job);
     }
 }

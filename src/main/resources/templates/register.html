@@ -1,4 +1,4 @@
-<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <head>
         <!-- META -->
         <title>DuuniHaKuRi | Duunia Kaikille</title>
@@ -24,9 +24,9 @@
                     </h1>
                 </div>
                 <div class="col_6 column right">
-                    <form id="add_job">
+                    <form id="add_job" sec:authorize="hasAuthority('EMPLOYER')">
                         <button class="large blue">
-                            <a href="#" th:href="@{/jobs/addjob}" id="addjob_button">Lisää Duuni</a>
+                            <a href="#" th:href ="@{/jobs/addjob}" id="addjob_button">Lisää Duuni</a>
                         </button>
                     </form>
                 </div>
@@ -39,16 +39,25 @@
                         <a href="#" th:href="@{/}">
                             Koti</a>
                     </li>
-                    <li>
+                    <li sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/jobs}">Tsekkaa Duunit</a>
                     </li>
-                    <li class="right">
+                    <li sec:authorize='isAuthenticated()'>
+                        <a href="#" th:href="@{/employer}">Omat Sivut</a>
+                    </li>
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/register}">
                             Rekisteröidy</a>
                     </li>
-                    <li class="right">
+                    <li class="right" sec:authorize='isAnonymous()'>
                         <a href="#" th:href="@{/login}">
                             Loggaa Sisään</a>
+                    </li>
+                    <li class="right" sec:authorize='isAuthenticated()'>
+                        <form th:action="@{/logout}" method="post">
+                            <button type='submit' name='logout' value='Logout'>
+                                Logout</button>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -59,23 +68,29 @@
                             <legend>Duunin tarjoaja luo tili</legend>
                             <p>
                                 <label for="company">Yrityksen nimi</label>
-                                <input id="company" name="companyName" type="text"/>
+                                <input id="company" name="companyName" type="text" th:field="*{companyName}"/>
+                                <p th:if="${#fields.hasErrors('companyName')}" th:errors='*{companyName}'></p>
                             </p>
                             <p>
                                 <label for="email_company">Sähköposti</label>
-                                <input id="email_company" name="email" type="email"/>
+                                <input id="email_company" name="email" type="email" th:field="*{email}"/>
+                                <p th:if="${#fields.hasErrors('email')}" th:errors='*{email}'></p>
                             </p>
                             <p>
                                 <label for="username_company">Käyttäjätunnus</label>
-                                <input id="username_company" name="username" type="text"/>
+                                <input id="username_company" name="username" type="text" th:field="*{username}"/>
+                                <p th:if="${#fields.hasErrors('username')}" th:errors='*{username}'></p>
+                                <p th:text="${notUnique}">error</p>
                             </p>
                             <p>
                                 <label for="password_company">Salasana</label>
-                                <input id="password_company" name="password" type="password"/>
+                                <input id="password_company" name="password" type="password" th:field="*{password}"/>
+                                <p th:if="${#fields.hasErrors('password')}" th:errors='*{password}'></p>
                             </p>
                             <p>
                                 <label for="company_description">Yritys esittely</label>
-                                <textarea id="company_description" name="companyDescription" rows="8" cols="40"></textarea>
+                                <textarea id="company_description" name="companyDescription" rows="8" cols="40" th:field="*{companyDescription}"></textarea>
+                                <p th:if="${#fields.hasErrors('companyDescription')}" th:errors='*{companyDescription}'></p>
                             </p>
                             <p>
                                 <input type="submit" value="Rekisteröidy Tarjoaja" class="large green"/>

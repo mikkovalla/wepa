@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import wad.auth.JpaAuthenticationProvider;
+import wad.domain.Employer;
 
 /**
  *
@@ -35,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/authenticate")
                 .defaultSuccessUrl("/employer")
+                .failureForwardUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll();
