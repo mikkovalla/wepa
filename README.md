@@ -9,10 +9,9 @@ kirjastolla joka on asennettu [Herokuun](http://heroku.com) ja käyttää Heroku
 (demo käyttää
 [ilmaista dynoa](https://www.heroku.com/pricing), joten se voi olla aika-ajoin hidas vastaamaan.)
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
 ### [Dokumentaatio](https://github.com/mikkovalla/wepa/blob/master/documentation/documentation.md)
 Ohjelman dokumentaatio löytyy Dokumentaatio linkin takaa.
+HUOM: DOKUMENTAATIOTA EI OLE VIELÄ PÄIVITETTY VASTAAMAAN TÄMÄN HETKISTÄ TOTEUTUSTA!
 
 
 Lisenssi [Apache Licence v2](https://www.apache.org/licenses/LICENSE-2.0.txt).
