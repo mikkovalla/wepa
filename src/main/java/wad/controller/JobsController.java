@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import wad.domain.Area;
 import wad.domain.Categories;
 import wad.domain.Employer;
@@ -111,6 +112,13 @@ public class JobsController {
 
         Job jobi = new Job(cat, emp, type, area, job.getJobName(), job.getDescription());
         jobService.save(jobi);
+        return "redirect:/employer";
+    }
+
+    @RequestMapping(value = "/jobs/{id}/delete", method = RequestMethod.POST)
+    public String deleteJob(@PathVariable Long id, RedirectAttributes redirect) {
+        jobService.delete(id);
+        redirect.addFlashAttribute("message", "Duuni poistettu palvelusta!");
         return "redirect:/employer";
     }
 }

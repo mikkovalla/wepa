@@ -85,6 +85,7 @@
 
             <div class="col_12 column">
                 <h4>Tervetuloa <span th:text="${session.employer.companyName}">j</span></h4>
+                <h6 th:if="${message}" th:text="${message}">viesti</h6>
                 <form id="update_form_employer" method="post" th:action="@{/employer/update}">
                     <fieldset>
                         <legend>Muuta tietojasi</legend>
@@ -136,9 +137,11 @@
                             <h5 th:text="${job.jobName}">Graafinen suunnittelija</h5><h6 th:text="${job.area.name}"></h6>
                             <h6 th:text="${job.category.name}"></h6>
                             <p th:text="${job.description}"></p><a href="#" th:href="@{/jobs/{id}(id=${job.id})}">
-                                Lisää...</a><p>
-                                <input type="submit" name="delete" value="Poista" method="post" class="orange"></input>
-                                <input type="submit" name="update" value="Muokkaa" method="post" class="green"></input>
+                                Lisää...</a>
+                            <p>
+                            <form th:action="@{/jobs/{id}/delete(id=${job.id})}" method="post">
+                                <input type="submit" name="delete" value="Poista" class="orange"></input>
+                            </form>
                             </p>
                         </div>
                     </li>
